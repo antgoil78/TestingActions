@@ -20,6 +20,6 @@ jobs:
             ${{ secrets.SNOWFLAKE_REGISTRY }}
       - name: Build and Push
         run: |
-          IMAGE="${{ secrets.SNOWFLAKE_REGISTRY }}/kumo_dev/dbt/repo:latest"
+          IMAGE="${{ secrets.SNOWFLAKE_REGISTRY }}:latest"
           docker build -t $IMAGE .
           docker push $IMAGE
