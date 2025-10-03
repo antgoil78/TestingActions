@@ -20,6 +20,6 @@ jobs:
             ${{ secrets.SNOWFLAKE_REGISTRY }}
       - name: Build and Push
         run: |
-          IMAGE="${{ secrets.SNOWFLAKE_REGISTRY }}:prefect-dbt"
+          IMAGE="${{ secrets.SNOWFLAKE_REGISTRY }}prefect-dbt:latest"
           docker build -t $IMAGE .
           docker push $IMAGE
