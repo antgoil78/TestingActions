@@ -1,0 +1,25 @@
+name: Build and Push to Snowflake Registry
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Login to Snowflake registry
+        run: |
+          echo "${{ secrets.SNOWFLAKE_PASSWORD }}" | docker login \
+            --username ${{ secrets.SNOWFLAKE_USER }} \
+            --password-stdin \
+            ${{ secrets.SNOWFLAKE_REGISTRY }}
+      - name: Build and Push
+        run: |
+          IMAGE="${{ secrets.SNOWFLAKE_REGISTRY }}/kumo_dev/dbt/repo:latest"
+          docker build -t $IMAGE .
+          docker push $IMAGE
