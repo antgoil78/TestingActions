@@ -7,16 +7,16 @@ WORKDIR /app
 # Upgrade pip, setuptools, wheel
 RUN python -m pip install --upgrade pip setuptools wheel
 
-# Install Prefect
+# Install Prefect 3.x and Snowflake connector
 RUN pip install --no-cache-dir \
-    "prefect==3.4.22" \
-    "griffe==0.49.0"
+    prefect==3.4.22 \
+    snowflake-connector-python
 
 # Copy your entrypoint script
 COPY entrypoint.sh /app/entrypoint.sh
 RUN chmod +x /app/entrypoint.sh
 
-# Expose the Prefect Orion UI port
+# Expose Prefect Server UI/API port
 EXPOSE 4200
 
 # Entrypoint for the container
