@@ -12,8 +12,8 @@ jobs:
     steps:
       - name: Test Prefect import
         run: |
-          docker build -t prefect-test .
-          docker run --rm prefect-test python -c "from griffe.dataclasses import Docstring; print('OK')"
+          docker build -t dockerfile .
+          docker run --rm dockerfile python -c "from griffe.dataclasses import Docstring; print('OK')"
 
       - name: Checkout code
         uses: actions/checkout@v3
