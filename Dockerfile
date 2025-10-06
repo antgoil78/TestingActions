@@ -9,7 +9,6 @@ RUN python -m pip install --upgrade pip setuptools wheel
 
 # Install Prefect
 RUN pip install --no-cache-dir \
-    "pydantic==1.10.13" \
     "prefect==3.4.22" \
     "griffe==0.49.0"
 
