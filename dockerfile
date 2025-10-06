@@ -1,14 +1,11 @@
 FROM python:3.11-slim
 
-# Install system deps (dbt needs gcc, libpq, etc.)
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    git \
-    libpq-dev \
-    && rm -rf /var/lib/apt/lists/*
+WORKDIR /app
+RUN pip install --no-cache-dir prefect==2.14.21 snowflake-connector-python
 
-# Install Prefect & dbt
-RUN pip install --no-cache-dir prefect==2.13.0 dbt-snowflake==1.8.0
+COPY entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
 
-# Default command (can be overridden)
-CMD ["prefect", "version"]
+EXPOSE 4200
+ENTRYPOINT ["/app/entrypoint.sh"]
+
