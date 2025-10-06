@@ -14,7 +14,7 @@ RUN python -m pip install --upgrade pip setuptools wheel
 RUN pip install --no-cache-dir prefect==2.14.21
 
 # Then explicitly install griffe after Prefect
-RUN pip install --no-cache-dir griffe==1.14.0
+RUN pip install --no-cache-dir griffe==1.13.0
 
 # Install Snowflake connector
 RUN pip install --no-cache-dir snowflake-connector-python
