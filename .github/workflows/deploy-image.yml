@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Test Prefect import
         run: |
-          docker build -f dockerfile -t prefect-test .
+          docker build -t prefect-test .
           docker run --rm dockerfile python -c "from griffe.dataclasses import Docstring; print('OK')"
 
       - name: Checkout code
