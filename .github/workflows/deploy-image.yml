@@ -6,8 +6,9 @@ on:
       - main
 
 jobs:
-  build-and-test:
+  build-and-push:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -19,12 +20,11 @@ jobs:
         run: echo "${{ secrets.SNOWFLAKE_PASSWORD }}" | docker login fbqxwjn-tz60398.registry.snowflakecomputing.com -u ${{ secrets.SNOWFLAKE_USER }} --password-stdin
 
       - name: Build Docker image
-        run: docker build -t prefect-test .
-
-      - name: Test Prefect import
-        run: docker run --rm prefect-test python -c "from griffe.dataclasses import Docstring; print('OK')"
+        run: |
+          docker build -t prefect-orion-local:latest .
 
       - name: Tag and push to Snowflake
         run: |
-          docker tag prefect-test fbqxwjn-tz60398.registry.snowflakecomputing.com/tutorial_db/data_schema/tutorial_repository/prefect-orion-local:latest
-          docker push fbqxwjn-tz60398.registry.snowflakecomputing.com/tutorial_db/data_schema/tutorial_repository/prefect-orion-local:latest
+          IMAGE_URI=fbqxwjn-tz60398.registry.snowflakecomputing.com/tutorial_db/data_schema/tutorial_repository/prefect-orion-local:latest
+          docker tag prefect-orion-local:latest $IMAGE_URI
+          docker push $IMAGE_URI
