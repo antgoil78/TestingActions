@@ -12,8 +12,12 @@ jobs:
     steps:
       - name: Test Prefect import
         run: |
+          # Build the image
           docker build -t prefect-test .
-          docker run --rm dockerfile python -c "from griffe.dataclasses import Docstring; print('OK')"
+      
+          # Test griffe import inside the container
+          docker run --rm prefect-test python -c "from griffe.dataclasses import Docstring; print('OK')"
+
 
       - name: Checkout code
         uses: actions/checkout@v3
