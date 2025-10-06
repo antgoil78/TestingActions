@@ -1,36 +1,30 @@
-name: Build and Push to Snowflake Registry
+name: Build and Push Prefect Container
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
-
-    
     steps:
-      - name: Test Prefect import
-        run: |
-          # Build the image
-          docker build -t prefect-test .
-      
-          # Test griffe import inside the container
-          docker run --rm prefect-test python -c "from griffe.dataclasses import Docstring; print('OK')"
-
-
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Login to Snowflake registry
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to Snowflake registry
+        run: echo "${{ secrets.SNOWFLAKE_PASSWORD }}" | docker login fbqxwjn-tz60398.registry.snowflakecomputing.com -u ${{ secrets.SNOWFLAKE_USER }} --password-stdin
+
+      - name: Build Docker image
+        run: docker build -t prefect-test .
+
+      - name: Test Prefect import
+        run: docker run --rm prefect-test python -c "from griffe.dataclasses import Docstring; print('OK')"
+
+      - name: Tag and push to Snowflake
         run: |
-          echo "${{ secrets.SNOWFLAKE_PASSWORD }}" | docker login \
-            --username ${{ secrets.SNOWFLAKE_USER }} \
-            --password-stdin \
-            ${{ secrets.SNOWFLAKE_REGISTRY }}
-      - name: Build and Push
-        run: |
-          IMAGE="${{ secrets.SNOWFLAKE_REGISTRY }}/prefect-orion-local:latest"
-          docker build -t $IMAGE .
-          docker push $IMAGE
-          
+          docker tag prefect-test fbqxwjn-tz60398.registry.snowflakecomputing.com/tutorial_db/data_schema/tutorial_repository/prefect-orion-local:latest
+          docker push fbqxwjn-tz60398.registry.snowflakecomputing.com/tutorial_db/data_schema/tutorial_repository/prefect-orion-local:latest
