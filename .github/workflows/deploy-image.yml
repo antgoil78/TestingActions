@@ -8,7 +8,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    
     steps:
+      - name: Test Prefect import
+        run: |
+          docker build -t prefect-test .
+          docker run --rm prefect-test python -c "from griffe.dataclasses import Docstring; print('OK')"
+
       - name: Checkout code
         uses: actions/checkout@v3
 
@@ -23,3 +29,4 @@ jobs:
           IMAGE="${{ secrets.SNOWFLAKE_REGISTRY }}/prefect-orion-local:latest"
           docker build -t $IMAGE .
           docker push $IMAGE
+          
