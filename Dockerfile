@@ -11,7 +11,7 @@ RUN python -m pip install --upgrade pip setuptools wheel
 RUN pip install --no-cache-dir \
     "pydantic==1.10.13" \
     "prefect==2.14.21" \
-    "griffe==0.49.0" \
+    "griffe==0.49.0"
 
 # Copy your entrypoint script
 COPY entrypoint.sh /app/entrypoint.sh
