@@ -9,9 +9,9 @@ RUN python -m pip install --upgrade pip setuptools wheel
 
 # Install Prefect
 RUN pip install --no-cache-dir \
-    prefect==2.16.7 \
-    griffe==0.49.0 \
-    snowflake-connector-python
+    "pydantic==1.10.13" \
+    "prefect==2.14.21" \
+    "griffe==0.49.0" \
 
 # Copy your entrypoint script
 COPY entrypoint.sh /app/entrypoint.sh
