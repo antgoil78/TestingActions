@@ -9,7 +9,7 @@ RUN python -m pip install --upgrade pip setuptools wheel
 
 # Install Prefect
 RUN pip install --no-cache-dir \
-    prefect==2.16.7 \ \
+    prefect==2.16.7 \
     griffe==0.49.0 \
     snowflake-connector-python
 
