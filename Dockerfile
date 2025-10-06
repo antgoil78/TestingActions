@@ -10,6 +10,7 @@ RUN python -m pip install --upgrade pip setuptools wheel
 # Install Prefect
 RUN pip install --no-cache-dir \
     prefect==3.0.0rc10 \
+    griffe==0.49.0 \
     snowflake-connector-python
 
 # Copy your entrypoint script
