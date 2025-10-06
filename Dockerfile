@@ -3,9 +3,9 @@ WORKDIR /app
 
 RUN python -m pip install --upgrade pip setuptools wheel
 
-# Prefect 2.14.21 will pull griffe 1.14 automatically
+# Prefect 2.10.x
 RUN pip install --no-cache-dir \
-    prefect==2.14.21 \
+    prefect==2.10.x \
     snowflake-connector-python==3.17.4
 
 COPY entrypoint.sh /app/entrypoint.sh
