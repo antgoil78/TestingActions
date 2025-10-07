@@ -1,12 +1,19 @@
 #!/bin/bash
 set -e
 
+# Disable Prefect telemetry (avoids errors about unreachable Prefect Cloud)
+export PREFECT_TELEMETRY_ENABLED=false
+
+# Run Prefect server locally
 echo "Starting Prefect server..."
 prefect server start --host 0.0.0.0 --port 4200 &
+
+# Wait a few seconds for the server to be ready
 sleep 15
 
-export PREFECT_API_URL="http://127.0.0.1:4200/api"
+# Set API URL for worker
+export PREFECT_API_URL=http://127.0.0.1:4200/api
 
+# Start Prefect worker
 echo "Starting Prefect worker..."
-prefect worker start --pool "snowflake"
-
+prefect worker start -q snowflake
