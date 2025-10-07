@@ -1,34 +1,24 @@
 #!/bin/bash
 set -e
 
-# -----------------------------
-# Configuration
-# -----------------------------
+# ---- CONFIGURATION ----
+# External URL for the UI (public ingress from Snowflake)
+export PREFECT_API_URL="https://ifztue-vymkbmw-ov24823.snowflakecomputing.app/api"
 
-# The Snowflake service endpoint that exposes the UI/API externally
-export PREFECT_API_URL="http://127.0.0.1:4200/api"
+# Internal URL inside the container (worker talks to local server)
+export PREFECT_API_INTERNAL="http://127.0.0.1:4200/api"
 
-# Disable telemetry if needed (optional)
+# Disable telemetry (optional)
 export PREFECT_TELEMETRY_ENABLED=false
 
-# -----------------------------
-# Start Prefect server
-# -----------------------------
-echo "Starting Prefect server..."
+# ---- START PREFECT SERVER ----
+echo "Starting Prefect Server..."
 prefect server start --host 0.0.0.0 --port 4200 &
 
-# Wait a few seconds to ensure the server is up
+# Give server a few seconds to initialize
 sleep 15
 
-# -----------------------------
-# Start Prefect worker
-# -----------------------------
-echo "Starting Prefect worker..."
-# Create a pool 'snowflake' if it doesn't exist and start worker
-prefect worker start --pool "snowflake" &
-
-# -----------------------------
-# Keep container alive
-# -----------------------------
-wait
-
+# ---- START WORKER ----
+echo "Starting Prefect Worker..."
+# Worker connects to local server inside container
+prefect worker start --api "$PREFECT_API_INTERNAL" -q snowflake
