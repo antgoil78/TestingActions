@@ -18,9 +18,9 @@ for i in {1..30}; do
     sleep 2
 done
 
-# Register your flow deployment
-# echo "Registering flows..."
-# prefect register -p /app/flows/run_dbt_model.py
+# Register flows (build deployments)
+echo "Registering flows..."
+python /app/flows/deployment.py
 
 echo "Starting Prefect Worker..."
 prefect worker start --pool "snowflake"
