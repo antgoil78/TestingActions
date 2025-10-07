@@ -19,8 +19,8 @@ for i in {1..30}; do
 done
 
 # Register your flow deployment
-echo "Registering flows..."
-prefect register -p /app/flows/run_dbt_model.py
+# echo "Registering flows..."
+# prefect register -p /app/flows/run_dbt_model.py
 
 echo "Starting Prefect Worker..."
 prefect worker start --pool "snowflake"
