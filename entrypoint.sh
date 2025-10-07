@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-echo "Starting Prefect Orion server..."
+echo "Starting Prefect server..."
 
 # Start Orion with correct host and external API URL
 prefect server start \
