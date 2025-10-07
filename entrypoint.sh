@@ -20,8 +20,7 @@ done
 
 # Register your flow deployment
 echo "Registering flows..."
-prefect deployment build /app/flows/run_dbt_model.py:run_sdl_mcc_ref -n run_sdl_mcc_ref_deployment
-prefect deployment apply run_sdl_mcc_ref_deployment.yaml
+prefect register -p /app/flows/run_dbt_model.py
 
 echo "Starting Prefect Worker..."
 prefect worker start --pool "snowflake"
