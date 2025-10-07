@@ -1,22 +1,24 @@
 #!/bin/bash
 set -e
 
-# ---- CONFIGURATION ----
-# External URL for the UI (public ingress from Snowflake)
+# -----------------------------------------------
+# IMPORTANT: Set this to your Snowflake service endpoint
+# Example: ifztue-vymkbmw-ov24823.snowflakecomputing.app
+# -----------------------------------------------
 export PREFECT_API_URL="https://ifztue-vymkbmw-ov24823.snowflakecomputing.app/api"
-
-# Disable telemetry (optional)
 export PREFECT_TELEMETRY_ENABLED=false
 
-# ---- START PREFECT SERVER ----
+# Start Prefect server in background
 echo "Starting Prefect Server..."
 prefect server start --host 0.0.0.0 --port 4200 &
+SERVER_PID=$!
 
-# Give server some time to start
+# Give the server some time to initialize
 sleep 15
 
-# ---- START WORKER ----
+# Start Prefect worker attached to 'snowflake' pool
 echo "Starting Prefect Worker..."
-# No --api flag needed in Prefect 3.x
 prefect worker start --pool "snowflake"
 
+# Wait for server process (optional)
+wait $SERVER_PID
