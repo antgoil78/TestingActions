@@ -12,4 +12,7 @@ RUN pip install --no-cache-dir \
 COPY entrypoint.sh /app/entrypoint.sh
 RUN chmod +x /app/entrypoint.sh
 
+# Copy flows folder into container
+COPY flows/ /app/flows/
+
 ENTRYPOINT ["/app/entrypoint.sh"]
