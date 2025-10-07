@@ -6,10 +6,7 @@ set -e
 # -----------------------------
 
 # The Snowflake service endpoint that exposes the UI/API externally
-EXTERNAL_API_URL="https://ifztue-vymkbmw-ov24823.snowflakecomputing.app:4200/api"
-
-# Set environment variable so UI knows where the API is
-export PREFECT_API_URL="$EXTERNAL_API_URL"
+export PREFECT_API_URL="http://127.0.0.1:4200/api"
 
 # Disable telemetry if needed (optional)
 export PREFECT_TELEMETRY_ENABLED=false
