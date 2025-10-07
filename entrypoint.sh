@@ -18,4 +18,5 @@ sleep 15
 # ---- START WORKER ----
 echo "Starting Prefect Worker..."
 # No --api flag needed in Prefect 3.x
-prefect worker start -q snowflake
+prefect worker start --pool "snowflake"
+
