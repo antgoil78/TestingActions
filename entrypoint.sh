@@ -14,5 +14,8 @@ sleep 15
 # Set API URL for worker
 export PREFECT_API_URL="http://127.0.0.1:4200/api"
 
+echo "Testing.."
+curl http://127.0.0.1:4200/api
+
 echo "Starting Prefect worker..."
 prefect worker start --pool "snowflake"
