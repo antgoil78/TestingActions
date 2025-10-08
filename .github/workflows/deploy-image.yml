@@ -21,10 +21,13 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t prefect-orion-local:latest .
+          docker build \
+          --build-arg SNOWFLAKE_USER=${{ secrets.SNOWFLAKE_USER }} \
+          --build-arg SNOWFLAKE_PASSWORD=${{ secrets.SNOWFLAKE_PASSWORD }} \
+          -t prefect-server:latest .
 
       - name: Tag and push to Snowflake
         run: |
           IMAGE_URI=vymkbmw-ov24823.registry.snowflakecomputing.com/kumo_dev/prefect/prefect_repository/prefect-server:latest
-          docker tag prefect-orion-local:latest $IMAGE_URI
+          docker tag prefect-server:latest $IMAGE_URI
           docker push $IMAGE_URI
