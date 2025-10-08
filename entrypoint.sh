@@ -32,6 +32,6 @@ sleep 5
 
 # Trigger the flow run automatically
 echo "Triggering first flow run..."
-prefect deployment run "SDL_MCC_REF Deployment"
+prefect deployment run "DBT SDL_MCC_REF Flow/SDL_MCC_REF Deployment"
 
 wait $SERVER_PID
