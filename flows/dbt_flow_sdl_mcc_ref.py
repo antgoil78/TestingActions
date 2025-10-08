@@ -15,6 +15,7 @@ def run_dbt_model():
         schema="DBT"
     )
     
+    
     cs = conn.cursor()
     try:
         # Run only SDL_MCC_REF model in the Snowflake dbt project
