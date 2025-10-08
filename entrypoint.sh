@@ -18,6 +18,8 @@ for i in {1..30}; do
     sleep 2
 done
 
+prefect work-pool create process snowflake
+
 # Register flows (build deployments)
 #echo "Deploy flows..."
 #prefect deploy -n "SDL_MCC_REF Deployment" flows/dbt_flow_sdl_mcc_ref.py:dbt_sdl_mcc_ref_flow --name dbt_sdl_mcc_ref --pool "snowflake"
