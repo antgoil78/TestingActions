@@ -1,5 +1,5 @@
 from prefect import flow
-from flows.utils.dbt_tasks import run_dbt_models
+from flows.utils.dbt_task import run_dbt_models
 
 @flow(name="DBT Cust Flow")
 def dbt_cust_flow():
