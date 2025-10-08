@@ -19,9 +19,15 @@ for i in {1..30}; do
 done
 
 # Register flows (build deployments)
-echo "Deploy flows..."
-prefect deploy -n "SDL_MCC_REF Deployment" flows/dbt_flow_sdl_mcc_ref.py:dbt_sdl_mcc_ref_flow --name dbt_sdl_mcc_ref --pool "snowflake"
-#prefect deploy --entrypoint flows/dbt_sdl_mcc_ref_flow.py:dbt_sdl_mcc_ref_flow --name dbt_sdl_mcc_ref --pool "snowflake"
+#echo "Deploy flows..."
+#prefect deploy -n "SDL_MCC_REF Deployment" flows/dbt_flow_sdl_mcc_ref.py:dbt_sdl_mcc_ref_flow --name dbt_sdl_mcc_ref --pool "snowflake"
+#prefect deploy --entrypoint flows/dbt_sdl_mcc_ref_flow.py:dbt_sdl_mcc_ref_flow --name "SDL_MCC_REF Deployment" --pool "snowflake"
+echo "Deploying flow..."
+prefect deploy flows/dbt_flow_sdl_mcc_ref.py:dbt_sdl_mcc_ref_flow --name "SDL_MCC_REF Deployment" --pool "snowflake"
+
+
+#echo "Deploying flow..."
+#prefect deploy flows/dbt_flow_sdl_mcc_ref.py:dbt_sdl_mcc_ref_flow --name "SDL_MCC_REF Deployment" --pool "snowflake"
 
 
 echo "Starting Prefect Worker..."
