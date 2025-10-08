@@ -20,7 +20,7 @@ done
 
 # Register flows (build deployments)
 echo "Deploy flows..."
-prefect deploy -n "SDL_MCC_REF Deployment" flows/dbt_sdl_mcc_ref_flow.py:dbt_sdl_mcc_ref_flow
+prefect deploy -n "SDL_MCC_REF Deployment" flows/dbt_flow_sdl_mcc_ref.py:dbt_flow_sdl_mcc_ref.py
 
 echo "Starting Prefect Worker..."
 prefect worker start --pool "snowflake"
