@@ -7,10 +7,10 @@ def run_dbt_models(models: list[str]):
     conn = snowflake.connector.connect(
         user=os.getenv("SNOWFLAKE_USER"),
         password=os.getenv("SNOWFLAKE_PASSWORD"),
-        account=os.getenv("SNOWFLAKE_ACCOUNT"),
-        warehouse=os.getenv("SNOWFLAKE_WAREHOUSE"),
-        database=os.getenv("SNOWFLAKE_DATABASE"),
-        schema=os.getenv("SNOWFLAKE_SCHEMA"),
+        account="VYMKBMW-OV24823",
+        warehouse="KUMO_ELT_GEN_1",
+        database="KUMO_DEV",
+        schema="DBT"
     )
 
     with conn.cursor() as cs:
