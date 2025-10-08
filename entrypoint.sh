@@ -18,7 +18,8 @@ for i in {1..30}; do
     sleep 2
 done
 
-prefect work-pool create process snowflake
+prefect work-pool create --type process snowflake
+
 
 # Register flows (build deployments)
 #echo "Deploy flows..."
