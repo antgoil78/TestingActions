@@ -7,8 +7,8 @@ import snowflake.connector
 @task
 def run_dbt_model():
     conn = snowflake.connector.connect(
-        user="ANDREAS.LARSSON",
-        password="Sebank_Sebank01",
+        user=os.getenv("SNOWFLAKE_USER"),
+        password=os.getenv("SNOWFLAKE_PASSWORD"),
         account="VYMKBMW-OV24823",
         warehouse="KUMO_ELT_GEN_1",
         database="KUMO_DEV",
