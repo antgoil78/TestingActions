@@ -5,6 +5,11 @@ export PREFECT_TELEMETRY_ENABLED=false
 export PREFECT_API_URL="http://127.0.0.1:4200/api"
 export PREFECT_UI_API_URL="https://ifztue-vymkbmw-ov24823.snowflakecomputing.app/api"
 
+echo "Testing connection... with ping"
+ping vymkbmw-ov24823.snowflakecomputing.com
+echo "Testing connection... with nslookup"
+nslookup vymkbmw-ov24823.snowflakecomputing.com
+
 echo "Starting Prefect Server..."
 prefect server start --host 0.0.0.0 --port 4200 &
 SERVER_PID=$!
