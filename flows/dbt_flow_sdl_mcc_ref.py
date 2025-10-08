@@ -9,7 +9,7 @@ def run_dbt_model():
     conn = snowflake.connector.connect(
         user="ANDREAS.LARSSON",
         password="Sebank_Sebank01",
-        account="vymkbmw-ov24823",
+        account="VYMKBMW-OV24823",
         warehouse="KUMO_ELT_GEN_1",
         database="KUMO_DEV",
         schema="DBT"
