@@ -23,7 +23,7 @@ prefect work-pool create --type process snowflake || true
 
 # Deploy flow (ignore if already deployed)
 prefect deploy flows/dbt_flow_sdl_mcc_ref.py:dbt_sdl_mcc_ref_flow --name "SDL_MCC_REF Deployment" --pool "snowflake" || true
-prefect deploy flows/dbt_cust.py:dbt_cust_flow --name "DBT Cust Flow" --pool "snowflake" || true
+prefect deploy flows/dbt_cust.py:dbt_cust_flow --name "DBT Cust Flow Deployment" --pool "snowflake" || true
 
 echo "Starting Prefect Worker..."
 prefect worker start --pool "snowflake" &
@@ -34,5 +34,6 @@ sleep 5
 # Trigger the flow run automatically
 echo "Triggering first flow run..."
 prefect deployment run "DBT SDL_MCC_REF Flow/SDL_MCC_REF Deployment"
+prefect deployment run "DBT Cust Flow/DBT Cust Flow Deployment"
 
 wait $SERVER_PID
