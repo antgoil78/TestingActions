@@ -1,5 +1,5 @@
 # Use official Python 3.11 image
-FROM python:3.11-bullseye
+FROM python:3.11-bullseye 
 
 WORKDIR /app
 
